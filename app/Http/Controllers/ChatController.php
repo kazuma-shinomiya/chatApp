@@ -15,8 +15,8 @@ class ChatController extends Controller
         return view('chats/index')->with(['users' => $users]);
     }
     
-    public function show(User $receiver)
+    public function show(User $user)
     {
-        return view('chats.show', compact('receiver'));
+        return view('chats/show')->with(['receiver' => $user]);
     }
 }
