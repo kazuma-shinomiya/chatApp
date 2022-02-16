@@ -30,6 +30,13 @@
         mounted() {
             axios.get(this.endpoint + '/fetch')
                 .then(response => (this.messages = response.data));
+            //LaravelEchoでpusherから受信したデータをmessages配列に追加
+            console.log(window.Echo.channel('send-message.' + this.receiverId + this.senderId))
+            window.Echo.channel('send-message.' + this.receiverId + this.senderId)
+                        .listen('SendMessage', response => {
+                            console.log(111111111);
+                            this.messages.push(response.message);
+                        });
         },
         methods: {
             sendMessage() {

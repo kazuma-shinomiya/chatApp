@@ -32,6 +32,6 @@ class SendMessage implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('send-message.' . $this->message->sender . $this->message->receiver, $this->message);
+        return new Channel('send-message.' . $this->message->sender_id . $this->message->receiver_id, $this->message);
     }
 }
