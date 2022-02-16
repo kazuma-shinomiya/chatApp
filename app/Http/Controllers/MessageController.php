@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Message;
 use Illuminate\Support\Facades\Auth;
+use App\Events\SendMessage;
+
 
 class MessageController extends Controller
 {
@@ -22,8 +24,9 @@ class MessageController extends Controller
     {
         $input = $request->input();
         $message->fill($input)->save();
-        
-        // broadcast(new SendMessage($message))->toOthers();
+        //イベントの発火でpusherにデータを送る
+        //toOthers()で自分自身を除外
+        broadcast(new SendMessage($message))->toOthers();
         return $message;
     }
 }
