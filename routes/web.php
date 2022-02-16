@@ -12,7 +12,9 @@
 */
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/', 'ChatController@index');
-    Route::get('/chats/{user}', 'ChatController@show');
+    Route::get('/chats/{receiver}', 'ChatController@show');
+    Route::get('/chats/{receiver}/fetch', 'MessageController@fetch');
+    Route::post('/chats/{receiver}/send', 'MessageController@send');
 });
 
 Auth::routes();
